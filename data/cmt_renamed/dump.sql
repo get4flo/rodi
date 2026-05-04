@@ -10162,6 +10162,10 @@ ALTER TABLE ONLY conference_members
     ADD CONSTRAINT "FKhasConferenceMemberConf" FOREIGN KEY (conference) REFERENCES conferences(id) ON DELETE CASCADE;
 
 
+ALTER TABLE ONLY conference_members
+    ADD CONSTRAINT "FKconferenceMembersConferenceMember" FOREIGN KEY (conference_member) REFERENCES conf_members(id) ON DELETE CASCADE;
+
+
 
 ALTER TABLE ONLY person_document
     ADD CONSTRAINT "FKhasConflictOfInterestDo" FOREIGN KEY (did) REFERENCES documents(id) ON DELETE CASCADE;
@@ -10177,6 +10181,10 @@ ALTER TABLE ONLY program_committee_members
     ADD CONSTRAINT "FKhasProgramCommitteeMemb" FOREIGN KEY (program_committee) REFERENCES program_committees(id) ON DELETE CASCADE;
 
 
+ALTER TABLE ONLY program_committee_members
+    ADD CONSTRAINT "FKprogramCommitteeMembersProgramCommitteeMember" FOREIGN KEY (program_committee_member) REFERENCES pc_members(id) ON DELETE CASCADE;
+
+
 
 ALTER TABLE ONLY paper_subject_area
     ADD CONSTRAINT "FKhasSubjectAreaPaper" FOREIGN KEY (pid) REFERENCES papers(id) ON DELETE CASCADE;
@@ -10190,6 +10198,10 @@ ALTER TABLE ONLY paper_subject_area
 
 ALTER TABLE ONLY mark_conflict_interests
     ADD CONSTRAINT "FKmarkConflictOfInterestPaper" FOREIGN KEY (paper) REFERENCES papers(id) ON DELETE CASCADE;
+
+
+ALTER TABLE ONLY mark_conflict_interests
+    ADD CONSTRAINT "FKmarkConflictInterestsConferenceMember" FOREIGN KEY (conference_member) REFERENCES conf_members(id) ON DELETE CASCADE;
 
 
 
@@ -10216,6 +10228,9 @@ ALTER TABLE ONLY conference_administrator
 ALTER TABLE ONLY set_max_papers
     ADD CONSTRAINT "FKsetMaxPapersAdministrator" FOREIGN KEY (administrator) REFERENCES administrators(id) ON DELETE CASCADE;
 
+
+ALTER TABLE ONLY set_max_papers
+    ADD CONSTRAINT "FKsetMaxPapersProgramCommitteeMember" FOREIGN KEY (program_committee_member) REFERENCES pc_members(id) ON DELETE CASCADE;
 
 
 ALTER TABLE ONLY paper_author

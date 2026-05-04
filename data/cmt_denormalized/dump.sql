@@ -6337,12 +6337,19 @@ ALTER TABLE ONLY "User"
 
 
 ALTER TABLE ONLY "assignReviewer"
-    ADD CONSTRAINT "assignReviewerAdministratorFK" FOREIGN KEY ("Administrator") REFERENCES "User"("ID");
+    ADD CONSTRAINT "assignReviewerAdministratorFK" FOREIGN KEY ("Administrator") REFERENCES "User"("ID") ON DELETE CASCADE;
 
+
+ALTER TABLE ONLY "assignReviewer"
+    ADD CONSTRAINT "assignReviewerReviewerFK" FOREIGN KEY ("Reviewer") REFERENCES "Person"("ID") ON DELETE CASCADE;
 
 
 ALTER TABLE ONLY "co-writePaper"
-    ADD CONSTRAINT "co-writePaperCo-authorFK" FOREIGN KEY ("Co-author") REFERENCES "Author"("ID");
+    ADD CONSTRAINT "co-writePaperCo-authorFK" FOREIGN KEY ("Co-author") REFERENCES "Author"("ID") ON DELETE CASCADE;
+
+
+ALTER TABLE ONLY "co-writePaper"
+    ADD CONSTRAINT "co-writePaperPaperFK" FOREIGN KEY ("Paper") REFERENCES "Document"("ID") ON DELETE CASCADE;
 
 
 
@@ -6410,6 +6417,9 @@ ALTER TABLE ONLY "hasConferenceMember"
     ADD CONSTRAINT "hasConferenceMemberConfer" FOREIGN KEY ("Conference") REFERENCES "Conference"("ID") ON DELETE CASCADE;
 
 
+ALTER TABLE ONLY "hasConferenceMember"
+    ADD CONSTRAINT "hasConferenceMemberConferenceMemberFK" FOREIGN KEY ("ConferenceMember") REFERENCES "Person"("ID") ON DELETE CASCADE;
+
 
 ALTER TABLE ONLY "hasConflictOfInterest"
     ADD CONSTRAINT "hasConflictOfInterestDocu" FOREIGN KEY ("Document") REFERENCES "Document"("ID") ON DELETE CASCADE;
@@ -6425,10 +6435,16 @@ ALTER TABLE ONLY "hasProgramCommitteeMember"
     ADD CONSTRAINT "hasProgramCommitteeMember" FOREIGN KEY ("ProgramCommittee") REFERENCES "ProgramCommittee"("ID") ON DELETE CASCADE;
 
 
+ALTER TABLE ONLY "hasProgramCommitteeMember"
+    ADD CONSTRAINT "hasProgramCommitteeMemberProgramCommitteeMember" FOREIGN KEY ("ProgramCommitteeMember") REFERENCES "ProgramCommitteeMember"("ID") ON DELETE CASCADE;
+
 
 ALTER TABLE ONLY "hasSubjectArea"
     ADD CONSTRAINT "hasSubjectAreaSubjectAreaFK" FOREIGN KEY ("SubjectArea") REFERENCES "SubjectArea"("ID") ON DELETE CASCADE;
 
+
+ALTER TABLE ONLY "hasSubjectArea"
+    ADD CONSTRAINT "hasSubjectAreaPaperAreaFK" FOREIGN KEY ("Paper") REFERENCES "Document"("ID") ON DELETE CASCADE;
 
 
 ALTER TABLE ONLY "paperAssignmentToolsRunBy"
@@ -6462,9 +6478,16 @@ ALTER TABLE ONLY "Paper"
 
 
 ALTER TABLE ONLY "setMaxPapers"
-    ADD CONSTRAINT "setMaxPapersAdministratorFK" FOREIGN KEY ("Administrator") REFERENCES "User"("ID");
+    ADD CONSTRAINT "setMaxPapersAdministratorFK" FOREIGN KEY ("Administrator") REFERENCES "User"("ID") ON DELETE CASCADE;
 
+
+ALTER TABLE ONLY "setMaxPapers"
+    ADD CONSTRAINT "setMaxPapersProgramCommitteeMemberFK" FOREIGN KEY ("ProgramCommitteeMember") REFERENCES "ProgramCommitteeMember"("ID") ON DELETE CASCADE;
 
 
 ALTER TABLE ONLY "submitPaper"
     ADD CONSTRAINT "submitPaperAuthorFK" FOREIGN KEY ("Author") REFERENCES "Author"("ID") ON DELETE CASCADE;
+
+
+ALTER TABLE ONLY "submitPaper"
+    ADD CONSTRAINT "submitPaperPaperFK" FOREIGN KEY ("Paper") REFERENCES "Document"("ID") ON DELETE CASCADE;

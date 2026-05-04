@@ -3304,6 +3304,12 @@ COPY "ProgramCommitteeMember" ("ID", "maxPapers", "addedBy") FROM stdin;
 637	\N	\N
 393	\N	\N
 1089	\N	\N
+1034	\N	\N
+678	\N	\N
+535	\N	\N
+24	\N	\N
+473	\N	\N
+200	\N	\N
 \.
 
 
@@ -6062,6 +6068,11 @@ ALTER TABLE ONLY "hasConflictOfInterest"
 ALTER TABLE ONLY "hasProgramCommitteeMember"
     ADD CONSTRAINT "FKhasProgramCommitteeMemb" FOREIGN KEY ("ProgramCommittee") REFERENCES "ProgramCommittee"("ID") ON DELETE CASCADE;
 
+
+ALTER TABLE ONLY "hasProgramCommitteeMember"
+    ADD CONSTRAINT "FKhasProgramCommitteeMemberProgramCommitteeMember" FOREIGN KEY ("ProgramCommitteeMember") REFERENCES "ProgramCommitteeMember"("ID") ON DELETE CASCADE;
+
+
 ALTER TABLE ONLY "hasSubjectArea"
     ADD CONSTRAINT "FKhasSubjectAreaPaper" FOREIGN KEY ("Paper") REFERENCES "Paper"("ID") ON DELETE CASCADE;
 
@@ -6074,6 +6085,10 @@ ALTER TABLE ONLY "hasSubjectArea"
 
 ALTER TABLE ONLY "markConflictOfInterest"
     ADD CONSTRAINT "FKmarkConflictOfInterestPaper" FOREIGN KEY ("Paper") REFERENCES "Paper"("ID") ON DELETE CASCADE;
+
+
+ALTER TABLE ONLY "markConflictOfInterest"
+    ADD CONSTRAINT "FKmarkConflictOfInterestConferenceMember" FOREIGN KEY ("ConferenceMember") REFERENCES "Person"("ID") ON DELETE CASCADE;
 
 
 
@@ -6094,6 +6109,10 @@ ALTER TABLE ONLY "reviewerBiddingStartedBy"
 
 ALTER TABLE ONLY "setMaxPapers"
     ADD CONSTRAINT "FKsetMaxPapersAdministrator" FOREIGN KEY ("Administrator") REFERENCES "Administrator"("ID") ON DELETE CASCADE;
+
+
+ALTER TABLE ONLY "setMaxPapers"
+    ADD CONSTRAINT "FKsetMaxPapersProgramCommitteeMember" FOREIGN KEY ("ProgramCommitteeMember") REFERENCES "ProgramCommitteeMember"("ID") ON DELETE CASCADE;
 
 
 

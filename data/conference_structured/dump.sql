@@ -6822,6 +6822,10 @@ ALTER TABLE ONLY "Abstract"
     ADD CONSTRAINT "Abstract_is_submitted_at_fkey" FOREIGN KEY (is_submitted_at) REFERENCES "Conference_volume"("ID");
 
 
+ALTER TABLE ONLY "Abstract"
+    ADD CONSTRAINT "Abstract_is_the_1th_part_of_fkey" FOREIGN KEY (is_the_1th_part_of) REFERENCES "Conference_document"("ID");
+
+
 
 ALTER TABLE ONLY "Committee"
     ADD CONSTRAINT "Committee_CHILD_DATA_was_a_program_committee_of_fkey" FOREIGN KEY (was_a_program_committee_of) REFERENCES "Conference_volume"("ID");
